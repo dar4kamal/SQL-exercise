@@ -18,6 +18,7 @@ select * from products where price >= 60 and price <= 120;
 -- 1.5 Select the name and price in cents (i.e., the price must be multiplied by 100).
 select name, price*100 from products;
 
+** 
 select name, concat(price*100, ' cents') from products;
 
 -- 1.6 Compute the average price of all the products.
@@ -28,13 +29,16 @@ select sum(price)/count(price) from products;
 select avg(price) from products where  Manufacturer = 2;
 
 -- 1.8 Compute the number of products with a price larger than or equal to $180.
+** 
 select count(*) from products where price>=180;
 
 -- 1.9 Select the name and price of all products with a price larger than or equal to $180, and sort first by price (in descending order), and then by name (in ascending order).
 select name, price from products where price>=180 order by price desc, name asc;
 
 -- 1.10 Select all the data from the products, including all the data for each product's manufacturer.
+*N* 
 select a.*, b.name from products a join Manufacturers b on(a.manufacturer = b.code);
+*N* 
 select a.*, b.name from products a, Manufacturers b where a.manufacturer = b.code;
 
 -- 1.11 Select the product name, price, and manufacturer name of all the products.
@@ -45,6 +49,7 @@ SELECT Products.Name, Price, Manufacturers.Name
    ON Products.Manufacturer = Manufacturers.Code;
 
 -- 1.12 Select the average price of each manufacturer's products, showing only the manufacturer's code.
+*E* 
 SELECT AVG(Price), Manufacturer
     FROM Products
 GROUP BY Manufacturer;
@@ -58,6 +63,7 @@ group by b.name;
 
 
 -- 1.14 Select the names of manufacturer whose products have an average price larger than or equal to $150.
+*N* 
 select avg(a.price), b.name 
 from Manufacturers b join Products a 
 on b.code = a.Manufacturer
@@ -72,6 +78,7 @@ SELECT AVG(Price), Manufacturers.Name
    
    
 -- 1.15 Select the name and price of the cheapest product.
+*E*
 select name, price from Products 
 where price = (
 select min(price)
